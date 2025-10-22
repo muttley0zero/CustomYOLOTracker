@@ -84,7 +84,7 @@ ___
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-[powrót do strony głównej](dokumentacja.md)
+[powrót do strony głównej](#wprowadzenie)
 
 ### filtr_Kalmana_i_ReID\.py
 Ten plik implementuje klasę Track, która wykorzystuje filtr Kalmana do śledzenia obiektów i zarządzania ich stanem.
