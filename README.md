@@ -51,7 +51,7 @@ from filterpy.kalman import KalmanFilter
 from scipy.optimize import linear_sum_assignment
 ```
 
-**[Wstępna konfiguracja środowiska](### Wstępna konfiguracja)**
+**[Wstępna konfiguracja środowiska](#wstępna-konfiguracja)**
 
 ___
 
