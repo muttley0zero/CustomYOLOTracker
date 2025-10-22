@@ -1,0 +1,40 @@
+HOTA:
+HOTA - Higher Order Tracking Accuracy, główny wynik(0-100), średnia jakość tracking uwzględniająca zarówno detekcję, jak i przypisywanie ID
+DetA - Detection Accuracy, jakość detekcji (czy obiekty zostały znalezione w danych klatkach)
+AssA - Association Accuracy, jakość asocjacji (czy śledzone ID są poprawnie przypisane przez cały czas pomiędzy różnymi klatkami)
+DetRe - Detection Recall, procent obiektów wykrytych (ile z Ground Truth zostało znalezionych)
+DetPr - Detection Precision, procent detekcji, które są poprawne (jak duzo fałszywych detekcji)
+AssRe/AssPr - odpowiednik recall/precision, ale dla ciągłości śledzenia (np. czy tracker potrafi utrzymać to samo ID)
+LocA - Localization Accuracy, średnia dokładność lokalizacji (Intersection over Union między predykcją Ground Truth)
+RHOTA - wariant HOTA kładący większy nacisk na asocjację
+HOTA(0), LocA(0), HOTALocA(0) - metryki przy progu IoU=0 (czyli bez oceny dokładności lokalizacji)
+
+CLEAR MOT(MOTA/MOTP)
+Starszy standard z MOT Challenge
+MOTA - Multiple Object Tracking Accuracy, uwzględnia false positives, false negatives, ID-switches (może być ujemne, jeśli tracker popełnia więcej błędów niż poprawnych detekcji)
+MOTP - Multiple Object Tracking Precision, pokazuje, jak dokładne są lokalizacje (średnie IoU dla prawidłowych dopasowań)
+MODA - podobne do MOTA, ale bez uwzględniania ID-switchów
+CLR_Re/CLR_Pr - recall i precision (ile obiektów znalezionych vs ile false positives)
+MTR/PTR/MLR - proporcja trajektorii:
+ -MTR - Mostly Tracked(>80% czasu śledzone poprawnie)
+ -PTR - Partially Tracked(20-80%)
+ -MLR - Mostly Lost(<20%)
+IDSW - liczba ID Switches (ile razy tracker przypisał inne ID do tego samego obiektu)
+Frag - fragmentacja (ile razy trajektoria się urywała)
+
+Identity
+Metryki pochodzące z ID metrics (IDF1, IDP, IDR)
+IDF1 - F1-score liczony na poziomie ID, łączy ID Recall i ID Precision, mówi jaka część poprawnych trajektorii jest odtworzona w całości
+IDR (ID Recall) - Recall dla identyfikacji, % ground-truth detekcji, które zostały poprawnie przypisane do jakiegoś ID
+IDP (ID Precision) - Precision dla identyfikacji,% predykcji, które mają poprawne ID
+IDTP/IDFN/IDFP - liczby absolutne:
+ -IDTP - Identity True Positives (ile detekcji z poprawnym ID)
+ -IDFN - Identity False Negatives (ile GT nie miało dopasowania)
+ -IDFP - Identity False Positives (ile predykcji miało złe ID)
+
+Count
+Zestawienie zliczające element w danych i predykcjach
+Dets - liczba detekcji, które tracker wypuścił (predykcje)
+GT_Dets - liczba detekcji w ground-truth (ile obiektów naprawdę było)
+IDs - liczba unikalnych identyfikatorów nadanych przez twój tracker
+GT_IDs - liczba unikalnych ID w ground-truth (ile rzeczywistych trajektorii)

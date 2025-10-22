@@ -1,0 +1,488 @@
+Eval Config:
+USE_PARALLEL         : False
+NUM_PARALLEL_CORES   : 8
+BREAK_ON_ERROR       : True
+RETURN_ON_ERROR      : False
+PRINT_RESULTS        : True
+PRINT_ONLY_COMBINED  : False
+PRINT_CONFIG         : True
+TIME_PROGRESS        : True
+OUTPUT_SUMMARY       : True
+OUTPUT_EMPTY_CLASSES : True
+OUTPUT_DETAILED      : True
+PLOT_CURVES          : True
+
+Kitti2DBox Config:
+PRINT_CONFIG         : True
+GT_FOLDER            : C:\Users\Bartek\Downloads\HOTA-metrics-master\HOTA-metrics-master\data/gt/kitti/kitti_2d_box_train
+TRACKERS_FOLDER      : C:\Users\Bartek\Downloads\HOTA-metrics-master\HOTA-metrics-master\data/trackers/kitti/kitti_2d_box_train/
+OUTPUT_FOLDER        : None
+TRACKERS_TO_EVAL     : None
+CLASSES_TO_EVAL      : ['car', 'pedestrian']
+SPLIT_TO_EVAL        : training
+INPUT_AS_ZIP         : False
+TRACKER_SUB_FOLDER   : data
+OUTPUT_SUB_FOLDER    :
+TRACKER_DISPLAY_NAMES : None
+
+Evaluating 1 tracker(s) on 21 sequence(s) for 2 class(es) on Kitti2DBox dataset using the following metrics: HOTA, CLEAR, Identity, Count
+
+
+Evaluating my_tracker
+
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0000)                          0.1209 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0587 sec
+    HOTA.eval_sequence()                                                   0.0233 sec
+    CLEAR.eval_sequence()                                                  0.0036 sec
+    Identity.eval_sequence()                                               0.0037 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0417 sec
+    HOTA.eval_sequence()                                                   0.0105 sec
+    CLEAR.eval_sequence()                                                  0.0020 sec
+    Identity.eval_sequence()                                               0.0036 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0000, my_tracker)                                        0.2723 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0001)                          0.4759 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1804 sec
+    HOTA.eval_sequence()                                                   0.1542 sec
+    CLEAR.eval_sequence()                                                  0.0306 sec
+    Identity.eval_sequence()                                               0.0406 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1007 sec
+    HOTA.eval_sequence()                                                   0.0299 sec
+    CLEAR.eval_sequence()                                                  0.0034 sec
+    Identity.eval_sequence()                                               0.0096 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0001, my_tracker)                                        1.0327 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0002)                          0.1442 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0846 sec
+    HOTA.eval_sequence()                                                   0.0663 sec
+    CLEAR.eval_sequence()                                                  0.0127 sec
+    Identity.eval_sequence()                                               0.0073 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0768 sec
+    HOTA.eval_sequence()                                                   0.0527 sec
+    CLEAR.eval_sequence()                                                  0.0095 sec
+    Identity.eval_sequence()                                               0.0066 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0002, my_tracker)                                        0.4658 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0003)                          0.0874 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0536 sec
+    HOTA.eval_sequence()                                                   0.0498 sec
+    CLEAR.eval_sequence()                                                  0.0085 sec
+    Identity.eval_sequence()                                               0.0050 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0311 sec
+    HOTA.eval_sequence()                                                   0.0001 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0003, my_tracker)                                        0.2392 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0004)                          0.2269 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1172 sec
+    HOTA.eval_sequence()                                                   0.1026 sec
+    CLEAR.eval_sequence()                                                  0.0202 sec
+    Identity.eval_sequence()                                               0.0104 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0748 sec
+    HOTA.eval_sequence()                                                   0.0214 sec
+    CLEAR.eval_sequence()                                                  0.0029 sec
+    Identity.eval_sequence()                                               0.0056 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0004, my_tracker)                                        0.5884 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0005)                          0.1644 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1084 sec
+    HOTA.eval_sequence()                                                   0.1012 sec
+    CLEAR.eval_sequence()                                                  0.0184 sec
+    Identity.eval_sequence()                                               0.0095 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0603 sec
+    HOTA.eval_sequence()                                                   0.0001 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0005, my_tracker)                                        0.4682 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0006)                          0.1716 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0970 sec
+    HOTA.eval_sequence()                                                   0.0692 sec
+    CLEAR.eval_sequence()                                                  0.0146 sec
+    Identity.eval_sequence()                                               0.0069 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0623 sec
+    HOTA.eval_sequence()                                                   0.0001 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0006, my_tracker)                                        0.4266 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0007)                          0.3677 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.2590 sec
+    HOTA.eval_sequence()                                                   0.2036 sec
+    CLEAR.eval_sequence()                                                  0.0379 sec
+    Identity.eval_sequence()                                               0.0330 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1574 sec
+    HOTA.eval_sequence()                                                   0.0387 sec
+    CLEAR.eval_sequence()                                                  0.0032 sec
+    Identity.eval_sequence()                                               0.0132 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0007, my_tracker)                                        1.1231 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0008)                          0.2564 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1360 sec
+    HOTA.eval_sequence()                                                   0.1155 sec
+    CLEAR.eval_sequence()                                                  0.0208 sec
+    Identity.eval_sequence()                                               0.0116 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0942 sec
+    HOTA.eval_sequence()                                                   0.0000 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0008, my_tracker)                                        0.6402 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0009)                          0.4307 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.2468 sec
+    HOTA.eval_sequence()                                                   0.1542 sec
+    CLEAR.eval_sequence()                                                  0.0289 sec
+    Identity.eval_sequence()                                               0.0405 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1490 sec
+    HOTA.eval_sequence()                                                   0.0367 sec
+    CLEAR.eval_sequence()                                                  0.0019 sec
+    Identity.eval_sequence()                                               0.0149 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0009, my_tracker)                                        1.1118 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0010)                          0.1252 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1029 sec
+    HOTA.eval_sequence()                                                   0.1018 sec
+    CLEAR.eval_sequence()                                                  0.0174 sec
+    Identity.eval_sequence()                                               0.0070 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0683 sec
+    HOTA.eval_sequence()                                                   0.0158 sec
+    CLEAR.eval_sequence()                                                  0.0029 sec
+    Identity.eval_sequence()                                               0.0059 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0010, my_tracker)                                        0.4534 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0011)                          0.3045 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1410 sec
+    HOTA.eval_sequence()                                                   0.1372 sec
+    CLEAR.eval_sequence()                                                  0.0280 sec
+    Identity.eval_sequence()                                               0.0152 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0918 sec
+    HOTA.eval_sequence()                                                   0.0293 sec
+    CLEAR.eval_sequence()                                                  0.0034 sec
+    Identity.eval_sequence()                                               0.0086 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0011, my_tracker)                                        0.7665 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0012)                          0.0702 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0295 sec
+    HOTA.eval_sequence()                                                   0.0259 sec
+    CLEAR.eval_sequence()                                                  0.0050 sec
+    Identity.eval_sequence()                                               0.0025 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0271 sec
+    HOTA.eval_sequence()                                                   0.0097 sec
+    CLEAR.eval_sequence()                                                  0.0051 sec
+    Identity.eval_sequence()                                               0.0021 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0012, my_tracker)                                        0.1806 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0013)                          0.3206 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0826 sec
+    HOTA.eval_sequence()                                                   0.0183 sec
+    CLEAR.eval_sequence()                                                  0.0039 sec
+    Identity.eval_sequence()                                               0.0069 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1345 sec
+    HOTA.eval_sequence()                                                   0.0940 sec
+    CLEAR.eval_sequence()                                                  0.0173 sec
+    Identity.eval_sequence()                                               0.0201 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0013, my_tracker)                                        0.7046 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0014)                          0.1589 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0425 sec
+    HOTA.eval_sequence()                                                   0.0359 sec
+    CLEAR.eval_sequence()                                                  0.0065 sec
+    Identity.eval_sequence()                                               0.0036 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0398 sec
+    HOTA.eval_sequence()                                                   0.0212 sec
+    CLEAR.eval_sequence()                                                  0.0040 sec
+    Identity.eval_sequence()                                               0.0029 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0014, my_tracker)                                        0.3211 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0015)                          0.2163 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1309 sec
+    HOTA.eval_sequence()                                                   0.1098 sec
+    CLEAR.eval_sequence()                                                  0.0218 sec
+    Identity.eval_sequence()                                               0.0095 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1198 sec
+    HOTA.eval_sequence()                                                   0.0704 sec
+    CLEAR.eval_sequence()                                                  0.0125 sec
+    Identity.eval_sequence()                                               0.0116 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0015, my_tracker)                                        0.7091 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0016)                          0.1672 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0749 sec
+    HOTA.eval_sequence()                                                   0.0588 sec
+    CLEAR.eval_sequence()                                                  0.0118 sec
+    Identity.eval_sequence()                                               0.0062 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0880 sec
+    HOTA.eval_sequence()                                                   0.0742 sec
+    CLEAR.eval_sequence()                                                  0.0137 sec
+    Identity.eval_sequence()                                               0.0080 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0016, my_tracker)                                        0.5102 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0017)                          0.1250 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.0336 sec
+    HOTA.eval_sequence()                                                   0.0001 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0612 sec
+    HOTA.eval_sequence()                                                   0.0538 sec
+    CLEAR.eval_sequence()                                                  0.0093 sec
+    Identity.eval_sequence()                                               0.0056 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0017, my_tracker)                                        0.2928 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0018)                          0.1352 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.1138 sec
+    HOTA.eval_sequence()                                                   0.1056 sec
+    CLEAR.eval_sequence()                                                  0.0167 sec
+    Identity.eval_sequence()                                               0.0094 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.0719 sec
+    HOTA.eval_sequence()                                                   0.0000 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0018, my_tracker)                                        0.4576 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0019)                          0.8176 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.3268 sec
+    HOTA.eval_sequence()                                                   0.2070 sec
+    CLEAR.eval_sequence()                                                  0.0392 sec
+    Identity.eval_sequence()                                               0.0239 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.3962 sec
+    HOTA.eval_sequence()                                                   0.3277 sec
+    CLEAR.eval_sequence()                                                  0.0670 sec
+    Identity.eval_sequence()                                               0.0839 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0019, my_tracker)                                        2.3013 sec
+    Kitti2DBox.get_raw_seq_data(my_tracker, 0020)                          0.4989 sec
+    Kitti2DBox.get_preprocessed_seq_data(car)                              0.3048 sec
+    HOTA.eval_sequence()                                                   0.2836 sec
+    CLEAR.eval_sequence()                                                  0.0529 sec
+    Identity.eval_sequence()                                               0.0453 sec
+    Count.eval_sequence()                                                  0.0000 sec
+    Kitti2DBox.get_preprocessed_seq_data(pedestrian)                       0.1699 sec
+    HOTA.eval_sequence()                                                   0.0000 sec
+    CLEAR.eval_sequence()                                                  0.0000 sec
+    Identity.eval_sequence()                                               0.0000 sec
+    Count.eval_sequence()                                                  0.0000 sec
+eval_sequence(0020, my_tracker)                                        1.3647 sec
+
+All sequences for my_tracker finished in 14.44 seconds
+
+HOTA: my_tracker-car               HOTA      DetA      AssA      DetRe     DetPr     AssRe     AssPr     LocA      RHOTA     HOTA(0)   LocA(0)   HOTALocA(0)
+0000                               10.836    2.8832    41.553    67.907    2.9066    62.408    52.942    78.444    52.617    14.314    67.243    9.6255
+0001                               6.6354    5.2857    8.5014    65.859    5.3685    40.001    10.831    77.199    23.446    9.1664    65.766    6.0284
+0002                               12.537    7.3611    21.548    44.374    7.8943    34.778    35.592    73.516    30.814    20.789    55.382    11.514
+0003                               22.736    11.506    45.195    71.683    11.858    67.756    48.52     82.214    56.788    28.081    74.69     20.974
+0004                               8.4502    4.8684    14.773    70.162    4.9272    26.589    26.485    79.658    32.078    11.159    71.574    7.9871
+0005                               17.822    9.8831    33.006    64.509    10.241    46.229    37.763    78.929    45.6      22.156    69.348    15.365
+0006                               11.698    3.5958    38.341    65.621    3.646     55.164    49.663    81.455    49.99     14.773    67.887    10.029
+0007                               9.2684    5.9013    14.638    70.669    5.9906    57.498    17.177    80.384    32.088    12.208    71.847    8.7712
+0008                               19.151    9.9659    36.822    66.729    10.343    46.278    56.898    83.045    49.554    24.216    77.421    18.748
+0009                               7.4996    5.7783    9.9535    61.528    5.9028    41.833    12.877    75.87     24.502    10.41     64.744    6.7397
+0010                               23.405    8.6633    63.617    75.898    8.8609    74.098    66.819    88.004    69.303    25.606    83.411    21.358
+0011                               17.482    9.9163    31.883    59.647    10.409    50.454    36.38     78.384    42.989    22.986    65.314    15.013
+0012                               13.912    4.8309    40.134    58.189    4.9121    47.183    55.848    74.027    48.293    21.182    63.915    13.539
+0013                               2.0135    0.37203   10.917    48.211    0.37268   26.433    27.521    70.105    22.922    3.5874    53.977    1.9364
+0014                               16.14     8.6329    30.258    50.864    9.2013    44.037    41.728    76.662    39.193    23.16     63.96     14.813
+0015                               20.214    8.5108    48.078    70.964    8.6797    65.134    54.835    80.53     58.371    26.02     73.725    19.183
+0016                               17.611    12.793    24.313    37.277    14.637    31.706    34.811    69.94     30.055    35.628    49.778    17.735
+0017                               0         0         0         0         0         0         0         100       0         0         100       0
+0018                               32.204    16.802    62.008    76.35     17.339    72.071    69.427    83.314    68.713    38.974    78.258    30.501
+0019                               15.853    6.2995    39.93     70.343    6.3863    54.714    50.927    78.849    52.971    21.275    72.492    15.423
+0020                               16.821    9.1899    31.556    61.319    9.5961    54.766    39.948    79.919    43.525    20.805    69.7      14.501
+COMBINED                           14.488    7.2073    29.865    63.192    7.4187    52.121    37.061    79        42.963    18.538    68.551    12.708
+
+CLEAR: my_tracker-car              MOTA      MOTP      MODA      CLR_Re    CLR_Pr    MTR       PTR       MLR       CLR_TP    CLR_FN    CLR_FP    IDSW      MT        PT        ML        Frag      
+0000                               -2177.7   75.286    -2168.8   83.721    3.5835    66.667    33.333    0         180       35        4843      19        6         3         0         6
+0001                               -1070.5   74.149    -1056.8   84.991    6.9281    68.605    25.581    5.814     1931      341       25941     312       59        22        5         50
+0002                               -457.7    70.491    -453.9    54.1      9.6246    26.667    66.667    6.6667    541       459       5080      38        4         10        1         23
+0003                               -436.83   79.564    -432.04   86.228    14.264    37.5      62.5      0         288       46        1731      16        3         5         0         11
+0004                               -1269.7   77.686    -1240.6   91.667    6.4375    80.769    15.385    3.8462    704       64        10232     223       21        4         1         20
+0005                               -475.75   76.334    -463.79   83.056    13.186    66.667    33.333    0         1000      204       6584      144       22        11        0         42
+0006                               -1653.6   81.171    -1647.4   76.2      4.2338    81.818    18.182    0         381       119       8618      31        9         2         0         12
+0007                               -1015.2   78.26     -1008.2   85.714    7.266     67.925    32.075    0         1686      281       21518     137       36        17        0         44
+0008                               -491.47   80.913    -480.26   82.44     12.779    85.714    14.286    0         831       177       5672      113       18        3         0         16
+0009                               -894.21   72.527    -882.5    79.927    7.6679    53.165    43.038    3.7975    1959      492       23589     287       42        34        3         95
+0010                               -692.07   87.04     -682.76   86.897    10.145    61.538    38.462    0         504       76        4464      54        8         5         0         9
+0011                               -439.35   76.498    -434.45   69.29     12.092    37.255    52.941    9.8039    1981      878       14402     140       19        27        5         80
+0012                               -1017.5   67.63     -1015.4   84.615    7.1429    100       0         0         121       22        1573      3         2         0         0         3
+0013                               -12812    59.105    -12808    64        0.49474   0         100       0         16        9         3218      1         0         1         0         2
+0014                               -434.79   72.366    -422.38   65.207    11.796    57.143    21.429    21.429    268       143       2004      51        8         3         3         4
+0015                               -647.78   78.886    -646      85.79     10.493    66.667    11.111    22.222    483       80        4120      10        6         1         2         5
+0016                               -159.21   59.259    -158.25   48.206    18.929    0         75        25        403       433       1726      8         0         3         1         10
+0017                               0         0         0         0         0         0         0         100       0         0         765       0         0         0         0         0
+0018                               -260.07   80.276    -254.42   92.962    21.111    77.778    22.222    0         1136      86        4245      69        14        4         0         16
+0019                               -926.5    75.931    -925.4    88.034    7.9925    83.333    16.667    0         721       98        8300      9         5         1         0         9
+0020                               -495.93   77.924    -490.21   74.392    11.642    58.095    32.381    9.5238    3640      1253      27626     280       61        34        10        77
+COMBINED                           -703.87   76.515    -695.79   77.998    9.1569    60.816    33.688    5.4965    18774     5296      186251    1945      343       190       31        534
+
+Identity: my_tracker-car           IDF1      IDR       IDP       IDTP      IDFN      IDFP
+0000                               5.1165    62.326    2.6677    134       81        4889
+0001                               7.577     50.264    4.0973    1142      1130      26730
+0002                               11.569    38.3      6.8137    383       617       5238
+0003                               20.569    72.455    11.986    242       92        1777
+0004                               5.2461    39.974    2.8072    307       461       10629
+0005                               14.269    52.076    8.2674    627       577       6957
+0006                               5.8322    55.4      3.0781    277       223       8722
+0007                               10.957    70.107    5.9429    1379      588       21825
+0008                               15.843    59.028    9.1496    595       413       5908
+0009                               8.8789    50.714    4.8654    1243      1208      24305
+0010                               15.032    71.897    8.3937    417       163       4551
+0011                               14.863    50.017    8.7286    1430      1429      14953
+0012                               10.996    70.629    5.9622    101       42        1593
+0013                               0.55232   36        0.27829   9         16        3225
+0014                               14.238    46.472    8.4067    191       220       2081
+0015                               16.802    77.087    9.4286    434       129       4169
+0016                               16.661    29.545    11.602    247       589       1882
+0017                               0         0         0         0         0         765
+0018                               29.381    79.378    18.026    970       252       4411
+0019                               12.459    74.847    6.7953    613       206       8408
+0020                               14.984    55.365    8.6644    2709      2184      28557
+COMBINED                           11.742    55.879    6.5602    13450     10620     191575
+
+Count: my_tracker-car              Dets      GT_Dets   IDs       GT_IDs
+0000                               5023      215       94        9
+0001                               27872     2272      291       86
+0002                               5621      1000      83        15
+0003                               2019      334       41        8
+0004                               10936     768       119       26
+0005                               7584      1204      103       33
+0006                               8999      500       142       11
+0007                               23204     1967      260       53
+0008                               6503      1008      96        21
+0009                               25548     2451      276       79
+0010                               4968      580       72        13
+0011                               16383     2859      164       51
+0012                               1694      143       52        2
+0013                               3234      25        47        1
+0014                               2272      411       62        14
+0015                               4603      563       79        9
+0016                               2129      836       23        4
+0017                               765       0         12        0
+0018                               5381      1222      50        18
+0019                               9021      819       127       6
+0020                               31266     4893      246       105
+COMBINED                           205025    24070     2439      564
+
+HOTA: my_tracker-pedestrian        HOTA      DetA      AssA      DetRe     DetPr     AssRe     AssPr     LocA      RHOTA     HOTA(0)   LocA(0)   HOTALocA(0)
+0000                               0.92542   0.29347   3.2412    50.416    0.29392   19.287    10.04     71.136    12.132    1.5894    50.311    0.79964
+0001                               0.67656   0.50868   0.95924   21.301    0.51775   2.8297    1.4282    76.571    4.3786    0.9311    67.548    0.62894
+0002                               23.912    10.551    54.253    62.807    11.062    55.442    79.262    82.855    58.341    28.894    77.933    22.518
+0003                               0         0         0         0         0         0         0         100       0         0         100       0
+0004                               0.77473   0.43174   1.431     35.855    0.43436   8.7993    1.8269    71.838    7.0608    1.5368    50.731    0.77963
+0005                               0         0         0         0         0         0         0         100       0         0         100       0
+0006                               0         0         0         0         0         0         0         100       0         0         100       0
+0007                               0.98613   0.52754   1.8539    31.1      0.53343   7.3264    2.5416    83.45     7.5718    1.3092    72.024    0.94291
+0008                               0         0         0         0         0         0         0         100       0         0         100       0
+0009                               0.32998   0.20062   0.58791   14.85     0.20233   2.0363    0.82293   68.914    2.8394    0.8597    35.469    0.30493
+0010                               0.58946   0.40901   0.88397   22.686    0.41429   4.9815    1.0661    78.233    4.3904    0.76557   72.254    0.55315
+0011                               2.3893    1.385     4.196     26.559    1.4338    10.621    5.959     74.608    10.465    4.073     57.946    2.3601
+0012                               0.56814   0.19015   1.748     2.9605    0.20243   2.4812    5.6155    69.265    2.2421    1.5824    27.933    0.44202
+0013                               2.983     2.5169    3.6286    66.52     2.5341    13.4      5.2799    76.931    15.342    4.2543    67.302    2.8632
+0014                               1.8172    0.67015   4.9723    49.587    0.67212   11.439    7.0271    68.139    15.631    3.6592    50.178    1.8361
+0015                               4.035     3.7705    4.4434    50.15     3.866     8.6579    8.3631    72.973    14.73     6.7972    56.927    3.8694
+0016                               9.6459    12.45     7.5404    56.655    13.131    14.802    13.744    73.29     20.608    15.237    60.872    9.2748
+0017                               15.043    8.0825    28.07     66.699    8.2862    38.091    39.934    78.779    43.223    20.846    69.106    14.406
+0018                               0         0         0         0         0         0         0         100       0         0         100       0
+0019                               7.9424    5.5871    11.419    53.029    5.7473    21.406    19.084    71.637    24.491    12.68     57.251    7.2598
+0020                               0         0         0         0         0         0         0         100       0         0         100       0
+COMBINED                           6.4952    3.6357    11.886    54.184    3.7053    21.048    19.237    73.33     25.096    9.7273    59.864    5.8232
+
+CLEAR: my_tracker-pedestrian       MOTA      MOTP      MODA      CLR_Re    CLR_Pr    MTR       PTR       MLR       CLR_TP    CLR_FN    CLR_FP    IDSW      MT        PT        ML        Frag      
+0000                               -17074    68.988    -17037    57.895    0.33753   50        50        0         11        8         3248      7         1         1         0         3
+0001                               -4082.1   72.183    -4057.5   28.302    0.68792   0         66.667    33.333    30        76        4331      26        0         2         1         2
+0002                               -422.78   81.669    -421.11   73.333    12.916    0         100       0         132       48        890       3         0         1         0         3
+0003                               0         0         0         0         0         0         0         100       0         0         144       0         0         0         0         0
+0004                               -8206.2   69.624    -8170.3   42.188    0.51107   0         60        40        27        37        5256      23        0         3         2         3
+0005                               0         0         0         0         0         0         0         100       0         0         923       0         0         0         0         0
+0006                               0         0         0         0         0         0         0         100       0         0         2028      0         0         0         0         0
+0007                               -5778.8   82.952    -5757.6   36.364    0.6237    0         100       0         24        42        3824      14        0         2         0         2
+0008                               0         0         0         0         0         0         0         100       0         0         14406     0         0         0         0         0
+0009                               -7332.1   53.12     -7332.1   3.5714    0.048662  0         0         100       1         27        2054      0         0         0         1         0
+0010                               -5437.9   72.254    -5413.8   31.034    0.56675   0         50        50        9         20        1579      7         0         1         1         0
+0011                               -1806.2   74.608    -1791.8   30.256    1.6334    0         40        60        59        136       3553      28        0         2         3         9
+0012                               -1456.2   63.878    -1456.2   3.125     0.21368   0         0         100       2         62        934       0         0         0         1         0
+0013                               -2499.9   73.934    -2450.1   87.444    3.3312    83.333    16.667    0         787       113       22838     448       35        7         0         39
+0014                               -7305     65.629    -7276.9   50.413    0.68332   0         100       0         61        60        8866      34        0         2         0         15
+0015                               -1186.6   69.305    -1171.2   63.004    4.8569    9.0909    54.545    36.364    453       266       8874      111       1         6         4         43
+0016                               -290.32   68.938    -280.5    75.481    17.494    57.895    31.579    10.526    1490      484       7027      194       11        6         2         86
+0017                               -645.71   76.126    -636.36   84.286    10.471    77.778    22.222    0         649       121       5549      72        7         2         0         18
+0018                               0         0         0         0         0         0         0         100       0         0         2082      0         0         0         0         0
+0019                               -792.27   67.834    -782.06   70.31     7.6202    38.71     61.29     0         4130      1744      50068     600       24        38        0         337
+0020                               0         0         0         0         0         0         0         100       0         0         6109      0         0         0         0         0
+COMBINED                           -1334.8   69.761    -1320.7   70.798    4.8415    47.305    43.713    8.982     7865      3244      154583    1567      79        73        15        560
+
+Identity: my_tracker-pedestrian    IDF1      IDR       IDP       IDTP      IDFN      IDFP
+0000                               0.24405   21.053    0.12274   4         15        3255
+0001                               0.17909   3.7736    0.091722  4         102       4357
+0002                               20.965    70        12.329    126       54        896
+0003                               0         0         0         0         0         144
+0004                               0.14962   6.25      0.075715  4         60        5279
+0005                               0         0         0         0         0         923
+0006                               0         0         0         0         0         2028
+0007                               0.40879   12.121    0.2079    8         58        3840
+0008                               0         0         0         0         0         14406
+0009                               0.096015  3.5714    0.048662  1         27        2054
+0010                               0.24737   6.8966    0.12594   2         27        1586
+0011                               1.2083    11.795    0.63677   23        172       3589
+0012                               0.4       3.125     0.21368   2         62        934
+0013                               1.631     22.222    0.84656   200       700       23425
+0014                               0.46419   17.355    0.23524   21        100       8906
+0015                               2.5284    17.663    1.3616    127       592       9200
+0016                               9.551     25.38     5.8824    501       1473      8016
+0017                               11.28     51.039    6.3408    393       377       5805
+0018                               0         0         0         0         0         2082
+0019                               6.6154    33.827    3.6662    1987      3887      52211
+0020                               0         0         0         0         0         6109
+COMBINED                           3.9215    30.633    2.0948    3403      7706      159045
+
+Count: my_tracker-pedestrian       Dets      GT_Dets   IDs       GT_IDs
+0000                               3259      19        57        2
+0001                               4361      106       86        3
+0002                               1022      180       21        1
+0003                               144       0         2         0
+0004                               5283      64        72        5
+0005                               923       0         22        0
+0006                               2028      0         32        0
+0007                               3848      66        61        2
+0008                               14406     0         128       0
+0009                               2055      28        40        1
+0010                               1588      29        21        2
+0011                               3612      195       50        5
+0012                               936       64        16        1
+0013                               23625     900       291       42
+0014                               8927      121       146       2
+0015                               9327      719       134       11
+0016                               8517      1974      93        19
+0017                               6198      770       93        9
+0018                               2082      0         33        0
+0019                               54198     5874      610       62
+0020                               6109      0         94        0
+COMBINED                           162448    11109     2102      167
+
+Timing analysis:
+Kitti2DBox.get_raw_seq_data                                            5.3855 sec
+Kitti2DBox.get_preprocessed_seq_data                                   4.8416 sec
+HOTA.eval_sequence                                                     3.0101 sec
+CLEAR.eval_sequence                                                    0.5576 sec
+Identity.eval_sequence                                                 0.5001 sec
+Count.eval_sequence                                                    0.0001 sec
+eval_sequence                                                          14.4302 sec
+Evaluator.evaluate                                                     17.0450 sec
