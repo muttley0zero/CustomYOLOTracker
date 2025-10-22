@@ -54,7 +54,8 @@ from scipy.optimize import linear_sum_assignment
 ___
 
 ### Struktura projektu
-- **[licznik_pojazdow_i_osob_v3.py](#licznik_pojazdow_i_osob_v3py)** - główny skrypt uruchomieniowy 
+- **[licznik_pojazdow_i_osob_v3.py](#licznik_pojazdow_i_osob_v3py)** - główny skrypt uruchomieniowy
+- **[ladowanie_yolo.py](#ladowanie_yolopy)** - ładuje model YOLO z podanego pliku
 - **[procesowanie.py](#procesowaniepy)** - przetwarzanie klatek i detekcja
 - **[tracker.py](#trackerpy)** - customowy tracker obiektów
 - **[filtr_Kalmana_i_ReID.py](#filtr_Kalmana_i_ReIDpy)** - implementacja filtru Kalmana i śledzenia
@@ -201,7 +202,7 @@ GT_IDs - liczba unikalnych ID w ground-truth (ile rzeczywistych trajektorii)
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-### licznik_pojazdow_i_osob_v3.py
+## licznik_pojazdow_i_osob_v3.py
 
 ___
 
@@ -309,11 +310,82 @@ cv2.imshow("Tracker Comparison", display_frame)
 
 </div>
 
+<div style="max-width: 700px; margin: 0 auto;">
+
+## ladowanie_yolo\.py
+Kod ładujący model YOLO z podanego pliku, sprawdza dostępność GPU i konfiguruje CUDA dla szybszego działania. Ustawiane są tutaj domyślne parametry dla detekcji i trackera(conf, IoU, NMS, maks. liczba detekcji). Wstępnie wykonuje kilka "dummy input" w celu przyspieszenia działania modelu przy pierwszej detekcji.
+
+
+### Ścieżka do modelu i sprawdzenie istnienia pliku
+```python
+script_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(script_dir, model_name)
+
+if not os.path.exists(model_path):
+    logger.warning(...)
+    model_path = os.path.join(script_dir, "yolov8n.pt")
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(...)
+```
+
+### Konfiguracja GPU/CPU
+```python
+torch.backends.cudnn.benchmark = True
+torch.backends.cuda.matmul.allow_tf32 = True
+torch.backends.cudnn.allow_tf32 = True
+```
+Optymalizacje PyTorch dla szybszego działania GPU
+
+```python
+if torch.cuda.is_available():
+    device = torch.device('cuda')
+    logger.info(f"CUDA dostępne - używam GPU: {torch.cuda.get_device_name(0)}")
+    torch.cuda.empty_cache()
+else:
+    device = torch.device('cpu')
+    logger.info("CUDA niedostępne - używam CPU")
+```
+Wybór urządzenia dla obliczeń GPU, jeśli niedostępne to CPU
+
+### Ładowanie modelu i konfiguracja detekcji
+```python
+model = YOLO(model_path)
+model.to(device)
+model.overrides['conf'] = conf_threshold
+model.overrides['iou'] = 0.5
+model.overrides['agnostic_nms'] = True
+model.overrides['max_det'] = 50
+```
+conf - minimalna pewność
+iou - próg Intersection over Union(próg pokrycia się ramek) dla Non-Maximum Suppresion(usuwanie duplikatów detekcji)
+agnostic_nms - jeśli dwa bounding boxy bardzo się pokrywają, jeden z nich zostanie usunięty(próg)
+max_det - maksymalna liczba detekcji na obraz
+
+### Warm-up GPU, dla szybszej pierwszej detekcji
+```python
+dummy_input = torch.randn(1, 3, 640, 640, dtype=torch.float16).to(device)
+for _ in range(3):
+    with torch.no_grad():
+        _ = model(dummy_input)
+```
+
+### Obsługa błędów
+```python
+except Exception as e:
+    logger.error(f"Błąd ładowania modelu: {e}")
+    model = YOLO(model_path)
+    device = torch.device('cpu')
+    return model, device
+```
+
+
+</div>
+
 <div style="max-width: 700px; margin: 0 auto;"> 
 
 [Powrót do strony głównej](#wprowadzenie)
 
-### procesowanie\.py
+## procesowanie\.py
 Ten plik zawiera funkcje do przetwarzania klatek wideo i wykrywania obiektów przy użyciu modelu YOLO.
 ___
 
@@ -459,7 +531,7 @@ return results
 
 [Powrót do strony głównej](#wprowadzenie)
 
-### tracker\.py
+## tracker\.py
 Ten plik implementuje zaawansowany tracker obiektów wykorzystujący algorytm węgierski do dopasowywania detekcji do istniejących śledzeń.
 ___
 
