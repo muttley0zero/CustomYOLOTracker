@@ -124,7 +124,11 @@ MOT16-02                           3.1848    2.4449    4.5669    436       17397
 COMBINED                           3.1848    2.4449    4.5669    436       17397     9111
 ```
 
+
+
 ### Wyjaśnienie znaczenia uzyskanych wyników
+
+
 
 # HOTA:
 HOTA - Higher Order Tracking Accuracy, główny wynik(0-100), średnia jakość tracking uwzględniająca zarówno detekcję, jak i przypisywanie ID
