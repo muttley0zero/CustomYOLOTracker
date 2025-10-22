@@ -199,184 +199,6 @@ GT_IDs - liczba unikalnych ID w ground-truth (ile rzeczywistych trajektorii)
 
 
 
-</div>
-
-<div style="max-width: 700px; margin: 0 auto;"> 
-
-[Powrót do strony głównej](#wprowadzenie)
-
-### filtr_Kalmana_i_ReID\.py
-Ten plik implementuje klasę Track, która wykorzystuje filtr Kalmana do śledzenia obiektów i zarządzania ich stanem.
-___
-
-#### Inicjalizacja i importy:
-Import bibliotek do obliczeń numerycznych, przetwarzania obrazu, filtra Kalmana i logowania.
-
-```python
-import numpy as np
-import cv2
-from filterpy.kalman import KalmanFilter
-from scipy.spatial.distance import cosine
-import logging
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-```
-
-#### Klasa Track - inicjalizacja:
-Inicjalizuje obiekt śledzenia z unikalnym ID, przechowuje historię pozycji, informacje o czasie widzenia, klasę obiektu, embedding do re-identyfikacji i inicjalizuje filtr Kalmana.
-
-```python
-class Track:
-    def __init__(self, detection, frame_number, track_id, embedding=None, class_id=None, bbox=None):
-        self.track_id = track_id
-        self.positions = []  # We'll store Kalman filter states instead of raw positions
-        self.first_seen = frame_number
-        self.last_seen = frame_number
-        self.class_id = class_id
-        self.logged = False
-        self.embedding = embedding.flatten() if embedding is not None else None
-        self.disappeared = 0
-        self.frame_number = frame_number
-        
-        # Initialize Kalman filter
-        self.kf = self._initialize_kalman_filter(bbox if bbox is not None else detection)
-        
-        # Store initial state
-        self.positions.append(self.kf.x.copy())
-```
-
-#### Inicjalizacja filtra Kalmana:
-Konwertuje detekcję na format [środek_x, środek_y, szerokość, wysokość] i inicjalizuje 8-wymiarowy stan filtra Kalmana z pozycją i prędkością.
-
-```python
-def _initialize_kalman_filter(self, detection):
-    # Convert detection to [x_center, y_center, width, height] format
-    if len(detection) == 4:  # It's a bbox [x1, y1, x2, y2]
-        x1, y1, x2, y2 = detection
-        w, h = x2 - x1, y2 - y1
-        cx, cy = x1 + w/2, y1 + h/2
-    else:  # It's a point detection [x, y]
-        cx, cy = detection[:2]
-        w, h = 50, 100  # Default size
-    
-    # 8-dimensional state: [cx, cy, w, h, vx, vy, vw, vh]
-    kf = KalmanFilter(dim_x=8, dim_z=4)
-    
-    # Initial state
-    kf.x = np.array([cx, cy, w, h, 0, 0, 0, 0], dtype=np.float32).reshape(8, 1)
-```
-
-#### Macierz przejścia stanu:
-Definiuje macierz przejścia stanu która modeluje ruch obiektu z uwzględnieniem prędkości.
-
-```python
-# State transition matrix - properly model movement
-dt = 1.0  # Time step (assuming 1 frame)
-kf.F = np.array([
-    [1, 0, 0, 0, dt, 0, 0, 0],
-    [0, 1, 0, 0, 0, dt, 0, 0],
-    [0, 0, 1, 0, 0, 0, dt, 0],
-    [0, 0, 0, 1, 0, 0, 0, dt],
-    [0, 0, 0, 0, 1, 0, 0, 0],
-    [0, 0, 0, 0, 0, 1, 0, 0],
-    [0, 0, 0, 0, 0, 0, 1, 0],
-    [0, 0, 0, 0, 0, 0, 0, 1]
-], dtype=np.float32)
-```
-
-#### Funkcja pomiaru:
-Określa które zmienne stanu są mierzone - tylko pozycja i rozmiar, bez prędkości.
-
-```python
-# Measurement function - we measure [cx, cy, w, h]
-kf.H = np.array([
-    [1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 0, 0, 0, 0]
-], dtype=np.float32)
-```
-
-#### Macierze kowariancji:
-Konfiguruje macierze kowariancji: początkową niepewność, szum pomiarowy i szum procesowy.
-
-```python
-# Covariance matrices - need proper tuning
-kf.P *= 100.0  # Initial uncertainty
-kf.R *= 5.0    # Measurement noise
-kf.Q *= 0.1    # Process noise
-
-return kf
-```
-
-#### Właściwość pozycji:
-Konwertuje stan filtra Kalmana z formatu [środek, rozmiar] z powrotem na format bounding box [x1, y1, x2, y2].
-
-```python
-@property
-def position(self):
-    # Get current state from Kalman filter
-    state = self.kf.x
-    cx, cy, w, h = state[0, 0], state[1, 0], state[2, 0], state[3, 0]
-    
-    # Convert back to [x1, y1, x2, y2] format
-    x1 = cx - w/2
-    y1 = cy - h/2
-    x2 = cx + w/2
-    y2 = cy + h/2
-    
-    return [x1, y1, x2, y2]
-```
-
-#### Predykcja stanu:
-Wykonuje predykcję następnego stanu na podstawie modelu ruchu i zapisuje przewidywaną pozycję.
-
-```python
-def predict(self):
-    # Predict next state
-    self.kf.predict()
-    self.positions.append(self.kf.x.copy())
-    return self.position
-```
-
-#### Aktualizacja stanu:
-Aktualizuje filtr Kalmana nowym pomiarem, resetuje licznik zniknięć i aktualizuje embedding oraz klasę obiektu.
-
-```python
-  def update(self, detection, embedding=None, class_id=None, bbox=None):
-        # Convert detection to measurement format [cx, cy, w, h]
-        if bbox is not None:
-            x1, y1, x2, y2 = bbox
-            w, h = x2 - x1, y2 - y1
-            cx, cy = x1 + w/2, y1 + h/2
-        else:
-            cx, cy = detection[:2]
-            w, h = 50, 100  # Default size
-        
-        measurement = np.array([cx, cy, w, h], dtype=np.float32).reshape(4, 1)
-        
-        # Update Kalman filter
-        self.kf.update(measurement)
-        self.positions.append(self.kf.x.copy())
-        
-        self.last_seen = self.frame_number
-        self.disappeared = 0
-
-        if embedding is not None:
-            self.embedding = embedding.flatten()
-        if class_id is not None:
-            self.class_id = class_id
-```
-
-
-
-[Powrót do strony głównej](#wprowadzenie)
-
-
-
-</div>
-
 <div style="max-width: 700px; margin: 0 auto;"> 
 
 ### licznik_pojazdow_i_osob_v3.py
@@ -843,6 +665,184 @@ for tid, track in list(self.tracks.items()):
 
 return self.tracks
 ```
+
+
+[Powrót do strony głównej](#wprowadzenie)
+
+
+
+</div>
+
+</div>
+
+<div style="max-width: 700px; margin: 0 auto;"> 
+
+[Powrót do strony głównej](#wprowadzenie)
+
+### filtr_Kalmana_i_ReID\.py
+Ten plik implementuje klasę Track, która wykorzystuje filtr Kalmana do śledzenia obiektów i zarządzania ich stanem.
+___
+
+#### Inicjalizacja i importy:
+Import bibliotek do obliczeń numerycznych, przetwarzania obrazu, filtra Kalmana i logowania.
+
+```python
+import numpy as np
+import cv2
+from filterpy.kalman import KalmanFilter
+from scipy.spatial.distance import cosine
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+```
+
+#### Klasa Track - inicjalizacja:
+Inicjalizuje obiekt śledzenia z unikalnym ID, przechowuje historię pozycji, informacje o czasie widzenia, klasę obiektu, embedding do re-identyfikacji i inicjalizuje filtr Kalmana.
+
+```python
+class Track:
+    def __init__(self, detection, frame_number, track_id, embedding=None, class_id=None, bbox=None):
+        self.track_id = track_id
+        self.positions = []  # We'll store Kalman filter states instead of raw positions
+        self.first_seen = frame_number
+        self.last_seen = frame_number
+        self.class_id = class_id
+        self.logged = False
+        self.embedding = embedding.flatten() if embedding is not None else None
+        self.disappeared = 0
+        self.frame_number = frame_number
+        
+        # Initialize Kalman filter
+        self.kf = self._initialize_kalman_filter(bbox if bbox is not None else detection)
+        
+        # Store initial state
+        self.positions.append(self.kf.x.copy())
+```
+
+#### Inicjalizacja filtra Kalmana:
+Konwertuje detekcję na format [środek_x, środek_y, szerokość, wysokość] i inicjalizuje 8-wymiarowy stan filtra Kalmana z pozycją i prędkością.
+
+```python
+def _initialize_kalman_filter(self, detection):
+    # Convert detection to [x_center, y_center, width, height] format
+    if len(detection) == 4:  # It's a bbox [x1, y1, x2, y2]
+        x1, y1, x2, y2 = detection
+        w, h = x2 - x1, y2 - y1
+        cx, cy = x1 + w/2, y1 + h/2
+    else:  # It's a point detection [x, y]
+        cx, cy = detection[:2]
+        w, h = 50, 100  # Default size
+    
+    # 8-dimensional state: [cx, cy, w, h, vx, vy, vw, vh]
+    kf = KalmanFilter(dim_x=8, dim_z=4)
+    
+    # Initial state
+    kf.x = np.array([cx, cy, w, h, 0, 0, 0, 0], dtype=np.float32).reshape(8, 1)
+```
+
+#### Macierz przejścia stanu:
+Definiuje macierz przejścia stanu która modeluje ruch obiektu z uwzględnieniem prędkości.
+
+```python
+# State transition matrix - properly model movement
+dt = 1.0  # Time step (assuming 1 frame)
+kf.F = np.array([
+    [1, 0, 0, 0, dt, 0, 0, 0],
+    [0, 1, 0, 0, 0, dt, 0, 0],
+    [0, 0, 1, 0, 0, 0, dt, 0],
+    [0, 0, 0, 1, 0, 0, 0, dt],
+    [0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1]
+], dtype=np.float32)
+```
+
+#### Funkcja pomiaru:
+Określa które zmienne stanu są mierzone - tylko pozycja i rozmiar, bez prędkości.
+
+```python
+# Measurement function - we measure [cx, cy, w, h]
+kf.H = np.array([
+    [1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 0]
+], dtype=np.float32)
+```
+
+#### Macierze kowariancji:
+Konfiguruje macierze kowariancji: początkową niepewność, szum pomiarowy i szum procesowy.
+
+```python
+# Covariance matrices - need proper tuning
+kf.P *= 100.0  # Initial uncertainty
+kf.R *= 5.0    # Measurement noise
+kf.Q *= 0.1    # Process noise
+
+return kf
+```
+
+#### Właściwość pozycji:
+Konwertuje stan filtra Kalmana z formatu [środek, rozmiar] z powrotem na format bounding box [x1, y1, x2, y2].
+
+```python
+@property
+def position(self):
+    # Get current state from Kalman filter
+    state = self.kf.x
+    cx, cy, w, h = state[0, 0], state[1, 0], state[2, 0], state[3, 0]
+    
+    # Convert back to [x1, y1, x2, y2] format
+    x1 = cx - w/2
+    y1 = cy - h/2
+    x2 = cx + w/2
+    y2 = cy + h/2
+    
+    return [x1, y1, x2, y2]
+```
+
+#### Predykcja stanu:
+Wykonuje predykcję następnego stanu na podstawie modelu ruchu i zapisuje przewidywaną pozycję.
+
+```python
+def predict(self):
+    # Predict next state
+    self.kf.predict()
+    self.positions.append(self.kf.x.copy())
+    return self.position
+```
+
+#### Aktualizacja stanu:
+Aktualizuje filtr Kalmana nowym pomiarem, resetuje licznik zniknięć i aktualizuje embedding oraz klasę obiektu.
+
+```python
+  def update(self, detection, embedding=None, class_id=None, bbox=None):
+        # Convert detection to measurement format [cx, cy, w, h]
+        if bbox is not None:
+            x1, y1, x2, y2 = bbox
+            w, h = x2 - x1, y2 - y1
+            cx, cy = x1 + w/2, y1 + h/2
+        else:
+            cx, cy = detection[:2]
+            w, h = 50, 100  # Default size
+        
+        measurement = np.array([cx, cy, w, h], dtype=np.float32).reshape(4, 1)
+        
+        # Update Kalman filter
+        self.kf.update(measurement)
+        self.positions.append(self.kf.x.copy())
+        
+        self.last_seen = self.frame_number
+        self.disappeared = 0
+
+        if embedding is not None:
+            self.embedding = embedding.flatten()
+        if class_id is not None:
+            self.class_id = class_id
+```
+
 
 
 [Powrót do strony głównej](#wprowadzenie)
