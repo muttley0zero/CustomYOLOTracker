@@ -56,11 +56,11 @@ from scipy.optimize import linear_sum_assignment
 ___
 
 ### Struktura projektu
-- **[licznik_pojazdow_i_osob_v3.py](#licznik_pojazdow_i_osob_v3.py)** - główny skrypt uruchomieniowy 
+- **[licznik_pojazdow_i_osob_v3.py](#licznikpojazdowiosobv3.py)** - główny skrypt uruchomieniowy 
 - **[procesowanie.py](#procesowanie.py)** - przetwarzanie klatek i detekcja
 - **[tracker.py](#tracker.py)** - customowy tracker obiektów
-- **[filtr_Kalmana_i_ReID.py](#filtr_Kalmana_i_ReID.py)** - implementacja filtru Kalmana i śledzenia
-- **[yolo_tracker.py](#yolo_tracker.py)** - integracja z trackerami YOLO
+- **[filtr_Kalmana_i_ReID.py](#filtrKalmanaiReID.py)** - implementacja filtru Kalmana i śledzenia
+- **[yolo_tracker.py](#yolotracker.py)** - integracja z trackerami YOLO
 - **[KittiResultsWriterYOLO.py](#KittiResultsWriterYOLO.py)** - eksport wyników do formatu KITTI
 - **[MOT16ResultsWriter.py](#MOT16ResultsWriter.py)** - eksport wyników do formatu MOT16
 
