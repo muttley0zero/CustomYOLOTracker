@@ -936,6 +936,7 @@ ___
 #### Instalacja sterowników NVIDIA:
 
 ![sterowniki.png](img/sterowniki.png "Formularz sterowników graficznych")
+
  [pobierz sterowniki](https://nvidia.com/pl-pl/drivers/)
 
 Należy pobrać i zainstalować sterowniki w najnowszej wersji z oficjalnej strony producenta układu graficznego.
