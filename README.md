@@ -953,6 +953,7 @@ Dla naszej karty graficznej - Nvidia GeForce RTX 5060 - abędzie to odpowiednio:
 
 #### Instalacja CUDA Toolkit:
 ![cuda-tooltit.png](img/cuda-toolkit.png "CUDA Toolkit")
+
 [pobierz CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive)
 
 Wchodząc w powyższy link należy pobrać i zainstalować odpowiednią wersję CUDA Toolkit.
@@ -969,6 +970,7 @@ Należy pamiętać, by zaznaczyć opcję "Add Python to PATH".
 
 #### Pobieranie opencv do kompilacji:
 [pobierz opencv](https://github.com/opencv/opencv)
+
 [pobierz opencv contrib](https://github.com/opencv/opencv_contrib)
 
 Pobrane pliki należy wypakować i umieścić w następującej lokalizacji:
