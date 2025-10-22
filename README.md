@@ -57,12 +57,12 @@ ___
 
 ### Struktura projektu
 - **[licznik_pojazdow_i_osob_v3.py](#licznik_pojazdow_i_osob_v3py)** - główny skrypt uruchomieniowy 
-- **[procesowanie.py](#procesowanie.py)** - przetwarzanie klatek i detekcja
-- **[tracker.py](#tracker.py)** - customowy tracker obiektów
-- **[filtr_Kalmana_i_ReID.py](#filtrKalmanaiReID.py)** - implementacja filtru Kalmana i śledzenia
-- **[yolo_tracker.py](#yolotracker.py)** - integracja z trackerami YOLO
-- **[KittiResultsWriterYOLO.py](#KittiResultsWriterYOLO.py)** - eksport wyników do formatu KITTI
-- **[MOT16ResultsWriter.py](#MOT16ResultsWriter.py)** - eksport wyników do formatu MOT16
+- **[procesowanie.py](#procesowaniepy)** - przetwarzanie klatek i detekcja
+- **[tracker.py](#trackerpy)** - customowy tracker obiektów
+- **[filtr_Kalmana_i_ReID.py](#filtr_Kalmana_i_ReIDpy)** - implementacja filtru Kalmana i śledzenia
+- **[yolo_tracker.py](#yolotrackerpy)** - integracja z trackerami YOLO
+- **[KittiResultsWriterYOLO.py](#KittiResultsWriterYOLOpy)** - eksport wyników do formatu KITTI
+- **[MOT16ResultsWriter.py](#MOT16ResultsWriterpy)** - eksport wyników do formatu MOT16
 
 ___
 
