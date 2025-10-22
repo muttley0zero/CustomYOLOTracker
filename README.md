@@ -69,8 +69,102 @@ ___
 ![schemat_działania.png](img/schemat_działania.jpg "Schemat działania")
 
 #### Benchmarki i metryki
+W celu śledzenia działania naszego trackera w połączeniu z wytrenowanym modelem detektora YOLOv8 użyty został benchmark TrackEval autorstwa JonathonLuiten, a danymi testowymi były treningowe datasety ze strony MotChallenge. Tracker generował bounding boxy dla osób i pojazdów znajdujących się na 5316 klatkach danych treningowych, te dane były później porównywane z ground-truthami(rzeczywiste współrzędne obiektów znajdujących się w danych klatkach). Przykładowe dane:
 
+```
+1,1,1376,485,37,28,0,11,1
+2,1,1379,486,37,28,0,11,1
+3,1,1382,487,38,29,0,11,1
+4,1,1386,488,38,29,0,11,1
+5,1,1389,490,38,29,0,11,1
+6,1,1393,491,38,30,0,11,1
+7,1,1396,492,39,30,0,11,1
+8,1,1399,494,39,30,0,11,1
+9,1,1403,495,39,30,0,11,1
+```
 
+Dane te są zapisywane w formacie(od lewej):
+- **frame** - numer klatki
+- **id** - unikalny identyfikator obiektu
+- **bb_left** - lewy górny róg bounding box w pikselach
+- **bb_top** - górny róg bounding box w pixelach
+- **bb_width** - szerokość bounding boxa
+- **bb_height** - wysokość bounding boxa
+- **conf** - pewność detektora (od 0.0 do 1.0)
+- **x** - pozycja obiektu w osi x
+- **y** - pozycja obiektu w osi y
+- **z** - pozycja obiektu w osi z(wysokość, odległość od kamery)
+W naszym przypadku pominięta zostaje zmienna z, ponieważ wykorzystywaliśmy tylko bounding-boxy 2D
+
+Nasze dane są następnie wykorzystywane przez benchmark TrackEval w celu ocenienia jakości działania algorytmu śledzenia obiektów. Oto przykładowe wyniki:
+
+```
+Evaluating MyTracker
+
+    MotChallenge2DBox.get_raw_seq_data(MyTracker, MOT16-02)                0.2512 sec
+    MotChallenge2DBox.get_preprocessed_seq_data(pedestrian)                0.1482 sec
+    HOTA.eval_sequence()                                                   0.1375 sec
+    CLEAR.eval_sequence()                                                  0.0266 sec
+    Identity.eval_sequence()                                               0.0159 sec
+    Count.eval_sequence()                                                  0.0000 sec
+1 eval_sequence(MOT16-02, MyTracker)                                     0.5827 sec
+
+All sequences for MyTracker finished in 0.58 seconds
+
+HOTA: MyTracker-pedestrian         HOTA      DetA      AssA      DetRe     DetPr     AssRe     AssPr     LocA      OWTA      HOTA(0)   LocA(0)   HOTALocA(0)
+MOT16-02                           4.8854    7.0496    3.4689    9.893     18.479    3.7316    50.221    73.791    5.7988    8.3975    49.694    4.173
+COMBINED                           4.8854    7.0496    3.4689    9.893     18.479    3.7316    50.221    73.791    5.7988    8.3975    49.694    4.173
+
+CLEAR: MyTracker-pedestrian        MOTA      MOTP      MODA      CLR_Re    CLR_Pr    MTR       PTR       MLR       sMOTA     CLR_TP    CLR_FN    CLR_FP    IDSW      MT        PT        ML        Frag      
+MOT16-02                           -31.296   66.557    -30.387   11.574    21.619    5.5556    12.963    81.481    -35.167   2064      15769     7483      162       3         7         44        31
+COMBINED                           -31.296   66.557    -30.387   11.574    21.619    5.5556    12.963    81.481    -35.167   2064      15769     7483      162       3         7         44        31
+
+Identity: MyTracker-pedestrian     IDF1      IDR       IDP       IDTP      IDFN      IDFP
+MOT16-02                           3.1848    2.4449    4.5669    436       17397     9111
+COMBINED                           3.1848    2.4449    4.5669    436       17397     9111
+```
+
+### Wyjaśnienie znaczenia uzyskanych wyników
+HOTA:
+HOTA - Higher Order Tracking Accuracy, główny wynik(0-100), średnia jakość tracking uwzględniająca zarówno detekcję, jak i przypisywanie ID
+DetA - Detection Accuracy, jakość detekcji (czy obiekty zostały znalezione w danych klatkach)
+AssA - Association Accuracy, jakość asocjacji (czy śledzone ID są poprawnie przypisane przez cały czas pomiędzy różnymi klatkami)
+DetRe - Detection Recall, procent obiektów wykrytych (ile z Ground Truth zostało znalezionych)
+DetPr - Detection Precision, procent detekcji, które są poprawne (jak duzo fałszywych detekcji)
+AssRe/AssPr - odpowiednik recall/precision, ale dla ciągłości śledzenia (np. czy tracker potrafi utrzymać to samo ID)
+LocA - Localization Accuracy, średnia dokładność lokalizacji (Intersection over Union między predykcją Ground Truth)
+RHOTA - wariant HOTA kładący większy nacisk na asocjację
+HOTA(0), LocA(0), HOTALocA(0) - metryki przy progu IoU=0 (czyli bez oceny dokładności lokalizacji)
+
+CLEAR MOT(MOTA/MOTP)
+Starszy standard z MOT Challenge
+MOTA - Multiple Object Tracking Accuracy, uwzględnia false positives, false negatives, ID-switches (może być ujemne, jeśli tracker popełnia więcej błędów niż poprawnych detekcji)
+MOTP - Multiple Object Tracking Precision, pokazuje, jak dokładne są lokalizacje (średnie IoU dla prawidłowych dopasowań)
+MODA - podobne do MOTA, ale bez uwzględniania ID-switchów
+CLR_Re/CLR_Pr - recall i precision (ile obiektów znalezionych vs ile false positives)
+MTR/PTR/MLR - proporcja trajektorii:
+ -MTR - Mostly Tracked(>80% czasu śledzone poprawnie)
+ -PTR - Partially Tracked(20-80%)
+ -MLR - Mostly Lost(<20%)
+IDSW - liczba ID Switches (ile razy tracker przypisał inne ID do tego samego obiektu)
+Frag - fragmentacja (ile razy trajektoria się urywała)
+
+Identity
+Metryki pochodzące z ID metrics (IDF1, IDP, IDR)
+IDF1 - F1-score liczony na poziomie ID, łączy ID Recall i ID Precision, mówi jaka część poprawnych trajektorii jest odtworzona w całości
+IDR (ID Recall) - Recall dla identyfikacji, % ground-truth detekcji, które zostały poprawnie przypisane do jakiegoś ID
+IDP (ID Precision) - Precision dla identyfikacji,% predykcji, które mają poprawne ID
+IDTP/IDFN/IDFP - liczby absolutne:
+ -IDTP - Identity True Positives (ile detekcji z poprawnym ID)
+ -IDFN - Identity False Negatives (ile GT nie miało dopasowania)
+ -IDFP - Identity False Positives (ile predykcji miało złe ID)
+
+Count
+Zestawienie zliczające element w danych i predykcjach
+Dets - liczba detekcji, które tracker wypuścił (predykcje)
+GT_Dets - liczba detekcji w ground-truth (ile obiektów naprawdę było)
+IDs - liczba unikalnych identyfikatorów nadanych przez twój tracker
+GT_IDs - liczba unikalnych ID w ground-truth (ile rzeczywistych trajektorii)
 
 
 
