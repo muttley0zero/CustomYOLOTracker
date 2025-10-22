@@ -1,5 +1,3 @@
-# CustomYOLOTracker
-
 <div style="max-width: 700px; margin: 0 auto;"> 
 
 # Dokumentacja techniczna programu do śledzenia obiektów
