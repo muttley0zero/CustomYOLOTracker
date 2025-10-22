@@ -56,13 +56,13 @@ from scipy.optimize import linear_sum_assignment
 ___
 
 ### Struktura projektu
-- **[licznik_pojazdow_i_osob_v3.py](licznik_pojazdow_i_osob_v3.py.md)** - główny skrypt uruchomieniowy 
-- **[procesowanie.py](procesowanie.py.md)** - przetwarzanie klatek i detekcja
-- **[tracker.py](tracker.py.md)** - customowy tracker obiektów
-- **[filtr_Kalmana_i_ReID.py](filtr_Kalmana_i_ReID.py.md)** - implementacja filtru Kalmana i śledzenia
-- **[yolo_tracker.py](yolo_tracker.py.md)** - integracja z trackerami YOLO
-- **[KittiResultsWriterYOLO.py](KittiResultsWriterYOLO.py.md)** - eksport wyników do formatu KITTI
-- **[MOT16ResultsWriter.py](MOT16ResultsWriter.py.md)** - eksport wyników do formatu MOT16
+- **[licznik_pojazdow_i_osob_v3.py](#licznik_pojazdow_i_osob_v3.py)** - główny skrypt uruchomieniowy 
+- **[procesowanie.py](#procesowanie.py)** - przetwarzanie klatek i detekcja
+- **[tracker.py](#tracker.py)** - customowy tracker obiektów
+- **[filtr_Kalmana_i_ReID.py](#filtr_Kalmana_i_ReID.py)** - implementacja filtru Kalmana i śledzenia
+- **[yolo_tracker.py](#yolo_tracker.py)** - integracja z trackerami YOLO
+- **[KittiResultsWriterYOLO.py](#KittiResultsWriterYOLO.py)** - eksport wyników do formatu KITTI
+- **[MOT16ResultsWriter.py](#MOT16ResultsWriter.py)** - eksport wyników do formatu MOT16
 
 ___
 
@@ -84,7 +84,7 @@ ___
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-[powrót do strony głównej](#wprowadzenie)
+[Powrót do strony głównej](#wprowadzenie)
 
 ### filtr_Kalmana_i_ReID\.py
 Ten plik implementuje klasę Track, która wykorzystuje filtr Kalmana do śledzenia obiektów i zarządzania ich stanem.
@@ -252,15 +252,13 @@ Aktualizuje filtr Kalmana nowym pomiarem, resetuje licznik zniknięć i aktualiz
 
 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 
 
 </div>
 
 <div style="max-width: 700px; margin: 0 auto;"> 
-
-[powrót do strony głównej](dokumentacja.md)
 
 ### licznik_pojazdow_i_osob_v3.py
 
