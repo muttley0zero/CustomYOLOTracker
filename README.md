@@ -41,13 +41,6 @@ Główne zależności projektu:
 
 Wszystkie biblioteki można importować za pomocą pliku requirements.txt używając komendy "pip install -r requirements.txt"
 
-```python
-import cv2
-import torch
-from ultralytics import YOLO
-from filterpy.kalman import KalmanFilter
-from scipy.optimize import linear_sum_assignment
-```
 
 **[Wstępna konfiguracja środowiska](#wstępna-konfiguracja)**
 
