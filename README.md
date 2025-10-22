@@ -66,7 +66,7 @@ ___
 
 ### Schemat działania
 
-![schemat_działania.png](img/schemat_działania.png "Schemat działania")
+![schemat_działania.png](img/schemat_działania.jpg "Schemat działania")
 
 #### Benchmarki i metryki
 
