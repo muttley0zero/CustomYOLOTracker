@@ -10,25 +10,36 @@ Autorzy: Bartosz Pawlaczyk, Paweł Roszak
 ___
 
 ## Wprowadzenie
-Nasz program to zaawansowany system do śledzenia obiektów w czasie rzeczywistym, wykorzystujący modele głębokiego uczenia (YOLOv8) oraz różne algorytmy śledzenia (BoT-SORT, ByteTrack, filtr Kalmana). System obsługuje zarówno strumienie wideo na żywo (RTSP), jak i pliki wideo, oferując funkcje liczenia obiektów, analizy ruchu i eksportu wyników w formatach benchmarkowych (KITTI, MOT16).
+Nasz program to zaawansowany system do śledzenia obiektów w czasie rzeczywistym, wykorzystujący modele głębokiego uczenia (YOLOv8, YOLOv11) oraz różne algorytmy śledzenia (BoT-SORT, ByteTrack, filtr Kalmana, algorytm ReID). System obsługuje zarówno strumienie wideo na żywo (RTSP), jak i pliki wideo, oferując funkcje liczenia obiektów, analizy ruchu i eksportu wyników w formatach benchmarkowych (KITTI, MOT16, HOTA).
 
 Program został napisany w ramach odbywania praktyk na kierunku teleinformatyka na terenie uczelni Politechniki Poznańskiej w terminie 08.2025-09.2025.
 
 ### Spis treści:
 1. Wykorzystane biblioteki
 2. Struktura projektu
-3. Benchmarki i metryki
-4. Podsumowanie
+3. Schemat działania
+4. Benchmarki i metryki
+5. Podsumowanie
 ___
 
 ### Wykorzystane biblioteki
 Główne zależności projektu:
-- **OpenCV (cv2)** - przetwarzanie obrazu i wideo
-- **PyTorch** - framework deep learning
-- **Ultralytics YOLO** - detekcja obiektów
-- **FilterPy** - implementacja filtru Kalmana
+- **OpenCV (cv2)** - przetwarzanie obrazu i wideo, rysowanie detekcji, odczyt z kamer i plików wideo
+- **PyTorch** - tworzenie, trenowanie i uruchamianie sieci neuronowych, obsługa GPU i tensorów
+- **TorchVision** - dodatek do PyTorch, wbudowane modele konwolucyjnych sieci neuronowych, transformacja obrazów, gotowe datasety do trenowania
+- **Ultralytics** - trenowanie, detekcja, śledzenie obiektów
+- **FilterPy** - implementacja filtru Kalmana(predykcja pozycji w systemach śledzenia)
 - **Supervision** - narzędzia do annotacji wideo
 - **SciPy** - optymalizacja i obliczenia naukowe
+- **NumPy** - operacje na tablicach, macierzach i wektorach
+- **tqdm** - pasek pokazujący progres ładowania danych np. ładowanie wideo
+- **imutils** - narzędzia pomocnicze w rotacji, skalowaniu czy kadrowaniu obrazów z OpenCV
+- **pandas** - biblioteka do analizy danych
+- **MatPlotLib** - wizualizacja wyników w wykresach
+- **Scikit-Learn** - klasyfikacja, regresja, analiza głównych składowych(PCA), normalizacja danych
+- **Pillow** - odczyt, zapis, konwersja, czy zmiana rozmiaru obrazów
+- **Gdown** - narzędzie do pobierania plików z Google Drive
+- **PyCocoTools** - narzędzie do pracy z COCO dataset
 
 ```python
 import cv2
@@ -50,6 +61,12 @@ ___
 - **[yolo_tracker.py](yolo_tracker.py.md)** - integracja z trackerami YOLO
 - **[KittiResultsWriterYOLO.py](KittiResultsWriterYOLO.py.md)** - eksport wyników do formatu KITTI
 - **[MOT16ResultsWriter.py](MOT16ResultsWriter.py.md)** - eksport wyników do formatu MOT16
+
+___
+
+### Schemat działania
+
+![schemat_działania.png](img/schemat_działania.png "Schemat działania")
 
 #### Benchmarki i metryki
 
