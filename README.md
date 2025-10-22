@@ -41,6 +41,8 @@ Główne zależności projektu:
 - **Gdown** - narzędzie do pobierania plików z Google Drive
 - **PyCocoTools** - narzędzie do pracy z COCO dataset
 
+Wszystkie biblioteki można importować za pomocą pliku requirements.txt używając komendy "pip install -r requirements.txt"
+
 ```python
 import cv2
 import torch
