@@ -125,7 +125,9 @@ COMBINED                           3.1848    2.4449    4.5669    436       17397
 ```
 
 ### Wyjaśnienie znaczenia uzyskanych wyników
+
 ##HOTA:
+
 HOTA - Higher Order Tracking Accuracy, główny wynik(0-100), średnia jakość tracking uwzględniająca zarówno detekcję, jak i przypisywanie ID
 
 DetA - Detection Accuracy, jakość detekcji (czy obiekty zostały znalezione w danych klatkach)
@@ -145,6 +147,7 @@ RHOTA - wariant HOTA kładący większy nacisk na asocjację
 HOTA(0), LocA(0), HOTALocA(0) - metryki przy progu IoU=0 (czyli bez oceny dokładności lokalizacji)
 
 ##CLEAR MOT(MOTA/MOTP)
+
 Starszy standard z MOT Challenge
 
 MOTA - Multiple Object Tracking Accuracy, uwzględnia false positives, false negatives, ID-switches (może być ujemne, jeśli tracker popełnia więcej błędów niż poprawnych detekcji)
@@ -164,6 +167,7 @@ IDSW - liczba ID Switches (ile razy tracker przypisał inne ID do tego samego ob
 Frag - fragmentacja (ile razy trajektoria się urywała)
 
 ##Identity
+
 Metryki pochodzące z ID metrics (IDF1, IDP, IDR)
 
 IDF1 - F1-score liczony na poziomie ID, łączy ID Recall i ID Precision, mówi jaka część poprawnych trajektorii jest odtworzona w całości
@@ -178,6 +182,7 @@ IDTP/IDFN/IDFP - liczby absolutne:
  -**IDFP** - Identity False Positives (ile predykcji miało złe ID)
 
 ##Count
+
 Zestawienie zliczające element w danych i predykcjach
 
 Dets - liczba detekcji, które tracker wypuścił (predykcje)
