@@ -361,7 +361,7 @@ cv2.putText(display_frame, f"FPS: {fps:.1f}", (10, 90),
 cv2.imshow("Tracker Comparison", display_frame)
 ```
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 
 
@@ -370,7 +370,7 @@ cv2.imshow("Tracker Comparison", display_frame)
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 ### procesowanie\.py
 Ten plik zawiera funkcje do przetwarzania klatek wideo i wykrywania obiektów przy użyciu modelu YOLO.
@@ -509,14 +509,14 @@ except Exception as e:
 return results
 ```
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 
 </div>
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 ### tracker\.py
 Ten plik implementuje zaawansowany tracker obiektów wykorzystujący algorytm węgierski do dopasowywania detekcji do istniejących śledzeń.
@@ -726,7 +726,7 @@ return self.tracks
 ```
 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 
 
@@ -734,7 +734,7 @@ return self.tracks
 
 <div style="max-width: 700px; margin: 0 auto;"> 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 ### Wstępna konfiguracja
 
@@ -860,7 +860,7 @@ Poradnik oparty na poniższym źródle:
 [OpenCV-CUDA-installation](https://github.com/chrismeunier/OpenCV-CUDA-installation)
 
 
-[powrót do strony głównej](dokumentacja.md)
+[Powrót do strony głównej](#wprowadzenie)
 
 
 
